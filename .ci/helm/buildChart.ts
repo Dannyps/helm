@@ -6,5 +6,6 @@ import { readFile, writeFile, copyFile, rename, rm } from "fs/promises";
 
 const version = getRequiredEnvVar("VERSION");
 
+await $`which helm`;
 await $`helm dependency update helm`;
 await $`helm package --version ${version} helm`;
