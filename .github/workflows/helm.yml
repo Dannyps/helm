@@ -50,7 +50,7 @@ jobs:
       - name: Helm Upgrade Docker Image Tag
         uses: endaft/action-yamler@v1.0.10
         with:
-          file: ./k8s/helm/values.yaml
+          file: ./my-helm-chart/values.yaml
           path: tag
           set: main-${{ github.sha }}
 
@@ -58,14 +58,14 @@ jobs:
         uses: endaft/action-yamler@v1.0.10
         with:
           # The path to a yaml file
-          file: ./k8s/helm/Chart.yaml
+          file: ./my-helm-chart/Chart.yaml
           path: appVersion
           set: ${{ steps.semvers.outputs.patch }}
 
       - name: Upgrade helm Chart Version
         uses: endaft/action-yamler@v1.0.10
         with:
-          file: ./k8s/helm/Chart.yaml
+          file: ./my-helm-chart/Chart.yaml
           path: version
           set: ${{ steps.semvers.outputs.patch }}
 
@@ -77,7 +77,7 @@ jobs:
           registry_username: __token__
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           name: graphql-reactive
-          path: k8s/helm
+          path: my-helm-chart
           tag: ${{ steps.semvers.outputs.patch }}
 
       - name: Configure Git
