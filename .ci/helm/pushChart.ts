@@ -5,4 +5,6 @@ import { getRequiredEnvVar } from "../lib.js";
 
 const version = getRequiredEnvVar("VERSION");
 
-await $`helm push repo-anme/helm-chart-${version}.tgz oci://ghcr.io/nmshd`;
+await $`ls -alh`;
+await $`mv my-helm-chart-${version}.tgz`;
+await $`helm push repo-name/helm-chart-${version}.tgz oci://ghcr.io/nmshd`;
