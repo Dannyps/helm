@@ -17,6 +17,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install script dependencies
+        run: npm install --prefix ./.ci
+        
       - name: Get latest Release
         id: get-latest-release
         uses: joutvhu/get-release@v1
