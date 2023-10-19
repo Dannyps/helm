@@ -26,11 +26,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Extract version from git tag
+        id: extract-version-from-git-tag
+        run: echo "VERSION=$(./.ci/extractVersionFromGitTag.ts)" >> $GITHUB_OUTPUT
+        env:
+          GIT_TAG: ${{ github.ref_name }}
+
       - name: Bump to latest version
         id: semvers
         uses: WyriHaximus/github-action-next-semvers@v1
         with:
-          version: $(./.ci/extractVersionFromGitTag.ts)"
+          version: ${{ steps.extract-version-from-git-tag.outputs.VERSION }}
 
       - uses: chrnorm/deployment-action@v2.0.5
         name: Create GitHub deployment
