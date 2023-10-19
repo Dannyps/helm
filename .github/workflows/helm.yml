@@ -68,15 +68,16 @@ jobs:
           file: ./my-helm-chart/Chart.yaml
           path: version
           set: ${{ steps.semvers.outputs.patch }}
+      - run: pwd
       - run: ls
       - name: Push helm chart
         uses: appany/helm-oci-chart-releaser@v0.4.1
         with:
-          repository: graphql-reactive
+          repository: helm
           registry: ghcr.io/${{ github.repository_owner }}
           registry_username: __token__
           registry_password: ${{ secrets.GITHUB_TOKEN }}
-          name: graphql-reactive
+          name: my-helm-chart
           path: my-helm-chart
           tag: ${{ steps.semvers.outputs.patch }}
 
