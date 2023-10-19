@@ -87,18 +87,6 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
-      - name: Create Release
-        uses: ncipollo/release-action@v1.13.0
-        with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          tag: ${{ steps.semvers.outputs.patch }}
-          commit: ${{ github.sha }}
-          name: graphql-reactive ${{ steps.semvers.outputs.patch }}
-          draft: false
-          prerelease: false
-          generateReleaseNotes: true
-          removeArtifacts: true
-
       - name: Deployment Status Failure
         if: failure()
         uses: chrnorm/deployment-status@v2.0.1
