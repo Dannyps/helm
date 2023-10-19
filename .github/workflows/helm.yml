@@ -70,11 +70,17 @@ jobs:
           set: ${{ steps.semvers.outputs.patch }}
       - run: pwd
       - run: ls
+      - name: set lower case owner name
+        run: |
+          echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
+        env:
+          OWNER: '${{ github.repository_owner }}'
+
       - name: Push helm chart
         uses: appany/helm-oci-chart-releaser@v0.4.1
         with:
           repository: helm
-          registry: ghcr.io/${{ github.repository_owner }}
+          registry: ghcr.io/${{ OWNER_LC  }}
           registry_username: __token__
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           name: my-helm-chart
