@@ -1,0 +1,12 @@
+project: default
+source:
+  repoURL: ghcr.io/dannyps/helm
+  targetRevision: 0.0.*
+  chart: my-helm-chart
+destination:
+  server: 'https://kubernetes.default.svc'
+  namespace: myapp
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true
