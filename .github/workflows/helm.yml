@@ -2,9 +2,8 @@ name: Release & Push Helm Charts
 
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
+    tags:
+      - "helm/*"
 
 jobs:
   helm-publish-and-release-charts:
