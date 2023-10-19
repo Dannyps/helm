@@ -68,7 +68,7 @@ jobs:
           file: ./my-helm-chart/Chart.yaml
           path: version
           set: ${{ steps.semvers.outputs.patch }}
-
+      - run: ls
       - name: Push helm chart
         uses: appany/helm-oci-chart-releaser@v0.4.1
         with:
