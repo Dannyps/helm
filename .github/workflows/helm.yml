@@ -19,7 +19,7 @@ jobs:
 
       - name: Install script dependencies
         run: npm install --prefix ./.ci
-        
+
       - name: Get latest Release
         id: get-latest-release
         uses: joutvhu/get-release@v1
@@ -34,18 +34,12 @@ jobs:
         env:
           GIT_TAG: ${{ github.ref_name }}
 
-      - name: Bump to latest version
-        id: semvers
-        uses: WyriHaximus/github-action-next-semvers@v1
-        with:
-          version: ${{ steps.extract-version-from-git-tag.outputs.VERSION }}
-
       - uses: chrnorm/deployment-action@v2.0.5
         name: Create GitHub deployment
         id: create-deployment
         with:
           token: "${{ github.token }}"
-          description: graphql-reactive ${{ steps.semvers.outputs.patch }} / main-${{ github.sha }}
+          description: my-helm-chart ${{ steps.semvers.outputs.patch }} / main-${{ github.sha }}
           sha: ${{ github.sha }}
 
       - name: Helm Upgrade Docker Image Tag
@@ -61,14 +55,14 @@ jobs:
           # The path to a yaml file
           file: ./my-helm-chart/Chart.yaml
           path: appVersion
-          set: ${{ steps.semvers.outputs.patch }}
+          set: ${{ steps.extract-version-from-git-tag.outputs.VERSION }}
 
       - name: Upgrade helm Chart Version
         uses: endaft/action-yamler@v1.0.10
         with:
           file: ./my-helm-chart/Chart.yaml
           path: version
-          set: ${{ steps.semvers.outputs.patch }}
+          set: ${{ steps.extract-version-from-git-tag.outputs.VERSION }}
       - run: pwd
       - run: ls
 
@@ -81,7 +75,7 @@ jobs:
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           name: my-helm-chart
           path: my-helm-chart
-          tag: ${{ steps.semvers.outputs.patch }}
+          tag: ${{ steps.extract-version-from-git-tag.outputs.VERSION }}
 
       - name: Deployment Status Failure
         if: failure()
