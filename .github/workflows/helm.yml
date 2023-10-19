@@ -36,7 +36,7 @@ jobs:
         id: semvers
         uses: WyriHaximus/github-action-next-semvers@v1
         with:
-          version: v0.0.1
+          version: v0.0.2
           #${{ steps.extract-version-from-git-tag.outputs.VERSION }}
 
       - uses: chrnorm/deployment-action@v2.0.5
