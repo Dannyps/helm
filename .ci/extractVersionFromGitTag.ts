@@ -10,7 +10,7 @@ const gitTag = getRequiredEnvVar("GIT_TAG");
 // const gitTagRegex = new RegExp(`^.+/(${semVerRegex.source})$`);
 // const dockerTag = gitTagRegex.exec(gitTag)?.[1];
 
-const splittedGitTag = gitTag.split("/");
+const splittedGitTag = gitTag.split("/v");
 const dockerTag = splittedGitTag.at(-1);
 
 echo(dockerTag ?? "");
