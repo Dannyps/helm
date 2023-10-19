@@ -30,7 +30,7 @@ jobs:
         id: semvers
         uses: WyriHaximus/github-action-next-semvers@v1
         with:
-          version: ${{ steps.get-latest-release.outputs.tag_name }}
+          version: $(./.ci/extractVersionFromGitTag.ts)"
 
       - uses: chrnorm/deployment-action@v2.0.5
         name: Create GitHub deployment
