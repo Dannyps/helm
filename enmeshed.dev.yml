@@ -1,0 +1,19 @@
+apiVersion: v2
+kind: Application
+metadata:
+  name: enmeshed-dev
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: enmeshed
+  sources:
+    - chart: backbone-helm-chart
+      repoURL: https://ghcr.io/nmshd
+      targetRevision: v3.0.3
+      helm:
+        valueFiles:
+          - $values/enmeshed-backbone/values.dev.yaml
+    - repoURL: "https://github.com/Dannyps/helm"
+      targetRevision: HEAD
+      ref: values
