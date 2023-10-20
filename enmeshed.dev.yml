@@ -9,7 +9,7 @@ spec:
     namespace: enmeshed
   sources:
     - chart: backbone-helm-chart
-      repoURL: https://ghcr.io/nmshd
+      repoURL: ghcr.io/nmshd
       targetRevision: v3.0.3
       helm:
         valueFiles:
