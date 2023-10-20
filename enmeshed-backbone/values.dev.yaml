@@ -1,0 +1,9 @@
+consumerapi:
+  env:
+    - name: infrastructure__eventBus__subscriptionClientName
+      value: consumerapi
+    - name: infrastructure__eventBus__connectionInfo
+      valueFrom:
+        secretKeyRef:
+          name: "eventbus-connectionstring"
+          key: "VALUE"
