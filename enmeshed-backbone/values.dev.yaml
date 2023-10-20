@@ -7,3 +7,33 @@ consumerapi:
         secretKeyRef:
           name: "eventbus-connectionstring"
           key: "VALUE"
+adminui:
+  env:
+    - name: infrastructure__eventBus__subscriptionClientName
+      value: adminui
+    - name: infrastructure__eventBus__connectionInfo
+      valueFrom:
+        secretKeyRef:
+          name: "eventbus-connectionstring"
+          key: "VALUE"
+
+    - name: infrastructure__sqlDatabase__connectionString
+      valueFrom:
+        secretKeyRef:
+          name: "adminui-sql-connectionstring"
+          key: "VALUE"
+    - name: modules__devices__infrastructure__sqlDatabase__connectionString
+      valueFrom:
+        secretKeyRef:
+          name: "devices-sql-connectionstring"
+          key: "VALUE"
+    - name: modules__quotas__infrastructure__sqlDatabase__connectionString
+      valueFrom:
+        secretKeyRef:
+          name: "quotas-sql-connectionstring"
+          key: "VALUE"
+    - name: authentication__apiKey
+      valueFrom:
+        secretKeyRef:
+          name: "adminui-apikey"
+          key: "VALUE"
